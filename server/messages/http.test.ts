@@ -158,14 +158,14 @@ describe('trava das rotas', () => {
     srv = await serveMessages();
     expect((await request(srv.base, '/api/health')).json).toMatchObject({ messages: true });
     expect((await snapshot(srv)).meta.messages).toBe(true);
-    for (const host of ['habblaud.lan', '192.168.0.10:4747']) {
+    for (const host of ['habblaud.lan', '192.168.0.10:5757']) {
       for (const [method, path] of ROUTES) {
         const r = await request(srv.base, path, { method, body: method === 'POST' ? { session: SESSION } : undefined, headers: { Host: host } });
         expect(r.status, `${host} ${path}`).toBe(403);
         expect(r.json).toMatchObject({ error: expect.stringMatching(/próprio computador/) });
       }
     }
-    expect((await post(srv, '/api/mod/inbox', { session: SESSION }, { Host: 'localhost:4747' })).status).toBe(200);
+    expect((await post(srv, '/api/mod/inbox', { session: SESSION }, { Host: 'localhost:5757' })).status).toBe(200);
   });
 
   it('guard: POST sem JSON (415) ou de outra origem (403) é barrado antes da rota', async () => {

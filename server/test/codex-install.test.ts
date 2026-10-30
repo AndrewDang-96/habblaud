@@ -122,7 +122,7 @@ describe('codex-install.ts (funções puras)', () => {
   });
 
   it('parseArgs', () => {
-    expect(parseArgs(['install'], {})).toEqual({ command: 'install', dryRun: false, account: undefined, port: 4747, waitS: DEFAULT_WAIT_S });
+    expect(parseArgs(['install'], {})).toEqual({ command: 'install', dryRun: false, account: undefined, port: 5757, waitS: DEFAULT_WAIT_S });
     expect(parseArgs(['status', '--port', '4851', '--espera', '60', '--conta', '.codex', '--dry-run'], {})).toEqual({ command: 'status', dryRun: true, account: '.codex', port: 4851, waitS: 60 });
     expect(parseArgs(['install'], { HABBLAUD_PORT: '4848' })).toMatchObject({ port: 4848 });
     expect(parseArgs(['--help'], {})).toBe('help');
@@ -171,7 +171,7 @@ describe('codex-install.ts (arquivos, HOME falso)', () => {
 
   const exec = (command: RunOptions['command'], extra: Partial<RunOptions> = {}, env: NodeJS.ProcessEnv = {}, health?: object) =>
     run(
-      { command, dryRun: false, port: 4747, waitS: DEFAULT_WAIT_S, ...extra },
+      { command, dryRun: false, port: 5757, waitS: DEFAULT_WAIT_S, ...extra },
       { env: { HOME: home, ...env }, home, now: new Date(2026, 9, 9, 9, 30, 0), hookPath: HOOK_SCRIPT, out: (l) => out.push(l), health: async () => health },
     );
   const read = (acc: string) => JSON.parse(readFileSync(join(home, acc, 'hooks.json'), 'utf8'));

@@ -41,7 +41,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const HOOK_SCRIPT = join(ROOT, 'mod', 'habblaud-codex', 'hook.mjs');
 /** O hook do Habblaud é reconhecido pelo caminho do script no comando (em qualquer pasta do repositório). */
 const HOOK_MARK = /habblaud-codex[\\/]+hook\.mjs/;
-export const DEFAULT_PORT = 4747;
+export const DEFAULT_PORT = 5757;
 export const DEFAULT_WAIT_S = 25;
 export const MIN_WAIT_S = 5;
 export const MAX_WAIT_S = 120;

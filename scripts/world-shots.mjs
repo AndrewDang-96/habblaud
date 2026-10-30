@@ -10,7 +10,7 @@
 // &fireworks=1). Sobe o Vite sozinho (ou usa --url de um Habblaud já rodando) e fotografa com o Chromium
 // headless do Playwright, sem tocar no navegador de quem roda.
 //
-// Uso: npm run shots:world [-- --url http://localhost:4747] [--out docs/screenshots] [--chromium /caminho/do/chrome]
+// Uso: npm run shots:world [-- --url http://localhost:5757] [--out docs/screenshots] [--chromium /caminho/do/chrome]
 // Sem o Chromium headless da versão do playwright-core do projeto: npx playwright-core install chromium-headless-shell,
 // ou --chromium (ou HABBLAUD_CHROMIUM) com o caminho de outro executável.
 import { mkdirSync } from 'node:fs';

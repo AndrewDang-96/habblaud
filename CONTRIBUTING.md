@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-O escritório de desenvolvimento fica em <http://localhost:4747>.
+O escritório de desenvolvimento fica em <http://localhost:5757>.
 
 ## Textos e traduções
 

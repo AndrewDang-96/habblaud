@@ -22,7 +22,7 @@ import {
 } from '../../scripts/hooks-install';
 import { HAS_POSIX_MODES, posixShell, tempDir } from './fixtures';
 
-const OPTS = { port: 4747, timeoutS: DEFAULT_TIMEOUT_S };
+const OPTS = { port: 5757, timeoutS: DEFAULT_TIMEOUT_S };
 const SH = posixShell();
 
 describe('hooks-install.ts (funções puras)', () => {
@@ -117,7 +117,7 @@ describe('hooks-install.ts (funções puras)', () => {
   });
 
   it('parseArgs', () => {
-    expect(parseArgs(['install'], {})).toEqual({ command: 'install', dryRun: false, nodeCmd: undefined, port: 4747, timeoutS: 300 });
+    expect(parseArgs(['install'], {})).toEqual({ command: 'install', dryRun: false, nodeCmd: undefined, port: 5757, timeoutS: 300 });
     expect(parseArgs(['status', '--port', '4851', '--timeout', '60', '--dry-run'], {})).toMatchObject({ command: 'status', port: 4851, timeoutS: 60, dryRun: true });
     expect(parseArgs(['install'], { HABBLAUD_PORT: '4848' })).toMatchObject({ port: 4848 });
     expect(parseArgs(['--help'], {})).toBe('help');
@@ -145,7 +145,7 @@ describe('hooks-install.ts (arquivos, HOME falso)', () => {
 
   const exec = (command: RunOptions['command'], extra: Partial<RunOptions> = {}, health?: { permissions?: boolean }) =>
     run(
-      { command, dryRun: false, nodeCmd: process.execPath, port: 4747, timeoutS: DEFAULT_TIMEOUT_S, ...extra },
+      { command, dryRun: false, nodeCmd: process.execPath, port: 5757, timeoutS: DEFAULT_TIMEOUT_S, ...extra },
       { env: { HOME: home }, home, now: new Date(2026, 9, 8, 9, 30, 0), hookPath: HOOK_SCRIPT, out: (l) => out.push(l), health: async () => health },
     );
   const read = (acc: string) => JSON.parse(readFileSync(join(home, acc, 'settings.json'), 'utf8'));

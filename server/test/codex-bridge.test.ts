@@ -158,7 +158,7 @@ describe('rotas do auxiliar do Codex', () => {
   });
 
   it('parseArgs', () => {
-    expect(parseArgs([], {})).toEqual({ port: 4747, once: false });
+    expect(parseArgs([], {})).toEqual({ port: 5757, once: false });
     expect(parseArgs(['--port', '4851', '--once'], {})).toEqual({ port: 4851, once: true });
     expect(parseArgs([], { HABBLAUD_PORT: '4848' })).toEqual({ port: 4848, once: false });
     expect(parseArgs(['-h'], {})).toBe('help');

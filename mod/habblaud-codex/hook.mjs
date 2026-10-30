@@ -31,7 +31,7 @@ import { homedir } from 'node:os';
 import { basename, isAbsolute, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const DEFAULT_PORT = 4747;
+export const DEFAULT_PORT = 5757;
 /** Espera padrão por uma decisão no escritório (segundos). */
 export const DEFAULT_WAIT_S = 25;
 export const MIN_WAIT_S = 5;

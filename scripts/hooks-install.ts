@@ -37,7 +37,7 @@ export const LEGACY_HOOK_SCRIPT = join(ROOT, 'scripts', 'permission-hook.mjs');
  */
 const HOOK_NAME = 'permission-hook.mjs';
 const EVENT = 'PermissionRequest';
-export const DEFAULT_PORT = 4747;
+export const DEFAULT_PORT = 5757;
 export const DEFAULT_TIMEOUT_S = 300;
 /** Folga do tempo limite do Claude Code sobre o do hook (o hook sempre desiste antes). */
 const TIMEOUT_SLACK_S = 30;

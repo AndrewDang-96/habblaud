@@ -284,16 +284,16 @@ describe('ptyRequestProblem', () => {
   const req = (h: Record<string, string>, addr = '127.0.0.1') => ({ socket: { remoteAddress: addr }, headers: h }) as unknown as IncomingMessage;
 
   it('aceita o próprio computador, mesma origem', () => {
-    expect(ptyRequestProblem(req({ host: 'localhost:4747', origin: 'http://localhost:4747', 'sec-fetch-site': 'same-origin' }))).toBeNull();
-    expect(ptyRequestProblem(req({ host: '127.0.0.1:4747' }, '::ffff:127.0.0.1'))).toBeNull();
+    expect(ptyRequestProblem(req({ host: 'localhost:5757', origin: 'http://localhost:5757', 'sec-fetch-site': 'same-origin' }))).toBeNull();
+    expect(ptyRequestProblem(req({ host: '127.0.0.1:5757' }, '::ffff:127.0.0.1'))).toBeNull();
   });
 
   it('recusa conexão de fora, Host da rede, outra origem e pedido de outro site', () => {
-    expect(ptyRequestProblem(req({ host: 'localhost:4747' }, '192.168.0.9'))).toMatch(/próprio computador/);
-    expect(ptyRequestProblem(req({ host: 'meu-mac.local:4747' }))).toMatch(/localhost/);
-    expect(ptyRequestProblem(req({ host: 'localhost:4747', origin: 'http://evil.example' }))).toMatch(/origem/);
-    expect(ptyRequestProblem(req({ host: 'localhost:4747', 'sec-fetch-site': 'same-site' }))).toMatch(/origem/);
-    expect(ptyRequestProblem(req({ host: 'localhost:4747', 'sec-fetch-site': 'cross-site' }))).toMatch(/origem/);
+    expect(ptyRequestProblem(req({ host: 'localhost:5757' }, '192.168.0.9'))).toMatch(/próprio computador/);
+    expect(ptyRequestProblem(req({ host: 'meu-mac.local:5757' }))).toMatch(/localhost/);
+    expect(ptyRequestProblem(req({ host: 'localhost:5757', origin: 'http://evil.example' }))).toMatch(/origem/);
+    expect(ptyRequestProblem(req({ host: 'localhost:5757', 'sec-fetch-site': 'same-site' }))).toMatch(/origem/);
+    expect(ptyRequestProblem(req({ host: 'localhost:5757', 'sec-fetch-site': 'cross-site' }))).toMatch(/origem/);
   });
 });
 

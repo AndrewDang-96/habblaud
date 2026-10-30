@@ -5,7 +5,7 @@
 //
 // 1. A cada 2 s, só onde a sessão desenha (`$.session.surfaces()` vazia = `claude -p`/SDK: nada a fazer) ou numa
 //    sessão do app desktop (CLAUDE_CODE_ENTRYPOINT=claude-desktop: SDK por baixo, sem superfície fora da tela), pergunta
-//    ao Habblaud local se há mensagens para ela: POST http://127.0.0.1:<HABBLAUD_PORT ou 4747>/api/mod/inbox com
+//    ao Habblaud local se há mensagens para ela: POST http://127.0.0.1:<HABBLAUD_PORT ou 5757>/api/mod/inbox com
 //    {session, account}. A pergunta também marca a presença da sessão: é ela que acende, no escritório, a caixa de
 //    mensagem deste agente. Fora do ar, ou respondendo qualquer coisa que não seja 2xx (403 = mensagens desligadas
 //    no Habblaud; 404 = uma versão sem a rota), passa a perguntar a cada 30 s até ele voltar.
@@ -35,7 +35,7 @@
 import type { EngineInterface, HttpResponse, Register } from 'claude-code'
 
 /** Porta padrão do Habblaud (a mesma do servidor, do mod e do docker-compose). */
-export const DEFAULT_PORT = 4747
+export const DEFAULT_PORT = 5757
 /** Intervalo das perguntas ao Habblaud; fora do ar, recua para o segundo até ele voltar. */
 export const POLL_MS = 2_000
 export const OFFLINE_POLL_MS = 30_000

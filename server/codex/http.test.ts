@@ -87,7 +87,7 @@ describe('POST /api/codex/events', () => {
   it('Host que não é local: 403; GET: 405; sem JSON: 415; corpo inválido: 400; acima de 256 KB: 413', async () => {
     const calls: unknown[] = [];
     const { base } = await serve({ applyHookEvent: (_a, e) => (calls.push(e), true) });
-    for (const host of ['habblaud.lan:4747', '192.168.0.10:4747']) {
+    for (const host of ['habblaud.lan:5757', '192.168.0.10:5757']) {
       const r = await request(base, '/api/codex/events', { method: 'POST', headers: { Host: host }, body: { event: EVENT } });
       expect(r.status, host).toBe(403);
     }

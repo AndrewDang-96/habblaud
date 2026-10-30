@@ -10,6 +10,10 @@ do meio (0.**3**.0).
 
 ## [Não lançado]
 
+### Corrigido
+
+- **Porta padrão:** o Habblaud agora abre em `5757` por padrão, inclusive no Docker e nos utilitários de instalação dos hooks.
+
 ## [1.0.3] - 2026-10-16
 
 ### Corrigido
@@ -235,7 +239,7 @@ celular é opcional e fica desligado até você rodar `npm run remote:setup`; o 
   `<nome>.local` rodando como serviço. O celular entra numa **segunda porta** (443 se estiver livre, senão 4748), que
   só é publicada depois do setup: toda requisição nela exige login, e por padrão o celular **aprova e recusa pedidos
   de permissão**; mensagens, terminal (com as **Entregas**: o que cada agente terminou, com resumo e anexos) e o
-  Novo agente só com `HABBLAUD_REMOTE_ALLOW`. A porta 4747 continua só no computador e sem login. **Configurações ›
+  Novo agente só com `HABBLAUD_REMOTE_ALLOW`. A porta 5757 continua só no computador e sem login. **Configurações ›
   Acesso pelo celular › Sair** encerra o login daquele aparelho (uma cópia do cookie também deixa de valer). Contribuição de
   @jasminaladdn (#96).
 - **Novo agente (botão + na barra do topo, opt-in com `HABBLAUD_PTY=1`):** começa uma sessão do Claude Code em

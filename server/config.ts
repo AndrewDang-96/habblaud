@@ -231,7 +231,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env, argv: string[] 
   const pkg = readPackage(rootDir);
   const remote = parseRemoteConfig(env, inDocker);
   return {
-    port: Number.isFinite(port) && port > 0 && port < 65536 ? port : 4747,
+    port: Number.isFinite(port) && port > 0 && port < 65536 ? port : 5757,
     host,
     dev: argv.includes('--dev'),
     demo: isTruthy(env.HABBLAUD_DEMO),

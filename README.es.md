@@ -154,7 +154,7 @@ npm run docker:up
 ```
 
 El script detecta tus cuentas de Claude Code, monta solo las carpetas necesarias (en modo de solo lectura), construye
-la imagen e inicia el contenedor, que se reinicia solo junto con Docker. Abre **http://localhost:4747**.
+la imagen e inicia el contenedor, que se reinicia solo junto con Docker. Abre **http://localhost:5757**.
 
 **Opción B: Node, sin Docker**
 
@@ -163,7 +163,7 @@ npm run build
 npm start
 ```
 
-Abre **http://localhost:4747**. Para desarrollar, usa `npm run dev` (servidor + Vite con recarga automática).
+Abre **http://localhost:5757**. Para desarrollar, usa `npm run dev` (servidor + Vite con recarga automática).
 
 Ahora abre Claude Code en cualquier proyecto y mira cómo tu agente llega por el ascensor. 🎉
 
@@ -240,7 +240,7 @@ printf 'HABBLAUD_BIND=0.0.0.0\n' > .env
 npm run docker:up -- --no-build
 ```
 
-Luego abre `http://<ip-do-computador>:4747` en el celular (en macOS: `ipconfig getifaddr en0`; si sale vacío,
+Luego abre `http://<ip-do-computador>:5757` en el celular (en macOS: `ipconfig getifaddr en0`; si sale vacío,
 `ipconfig getifaddr en1`). En modo Node, usa `HABBLAUD_HOST=0.0.0.0 npm start`.
 
 > ⚠️ Con esto, cualquier dispositivo de la red ve la actividad de los agentes (comandos, archivos, títulos de las
@@ -250,7 +250,7 @@ Luego abre `http://<ip-do-computador>:4747` en el celular (en macOS: `ipconfig g
 
 #### Celular con inicio de sesión y HTTPS (aprobar solicitudes)
 
-En lugar de exponer el puerto principal, abre un **segundo puerto con usuario, contraseña y HTTPS**. El 4747 queda solo
+En lugar de exponer el puerto principal, abre un **segundo puerto con usuario, contraseña y HTTPS**. El 5757 queda solo
 en la computadora (los hooks, los plugins y tu navegador siguen funcionando sin iniciar sesión); el puerto remoto va a
 la red y toda solicitud en él exige iniciar sesión. Lo que separa a los dos es el puerto por el que llegó la conexión,
 nunca el encabezado Host. Nada de esto existe antes del setup: sin él, no se publica ningún puerto extra.
@@ -294,7 +294,7 @@ comprobando la huella digital que mostró el setup.
 - **Fuera de casa (Tailscale):** con Tailscale en la computadora y en el celular, `tailscale serve --bg --https=443
   https+insecure://127.0.0.1:443` publica el puerto remoto (con inicio de sesión) solo para tus dispositivos, con un
   certificado válido en `https://<computador>.<tailnet>.ts.net`; agrega ese nombre a `HABBLAUD_ALLOWED_HOSTS`. Apunta
-  siempre al puerto remoto, nunca al 4747 (que no pide iniciar sesión).
+  siempre al puerto remoto, nunca al 5757 (que no pide iniciar sesión).
 - **Sesión:** 30 días; cambiar la contraseña (ejecutar el setup de nuevo) las cierra todas, y **Configuración ›
   Acceso desde el celular › Salir** cierra la de ese dispositivo. Después de 5 contraseñas incorrectas seguidas, cada nuevo intento espera de
   1 s a 5 min.
@@ -682,7 +682,7 @@ agentes de la demo nunca entran en las estadísticas de verdad.
 
 ¿Quieres ver la oficina llena sin tener sesiones abiertas?
 
-- Agrega **`?mock=1`** a la URL (p. ej., http://localhost:4747/?mock=1) para simular todo en el navegador, sin tus
+- Agrega **`?mock=1`** a la URL (p. ej., http://localhost:5757/?mock=1) para simular todo en el navegador, sin tus
   sesiones reales. Parámetros: `&speed=3` acelera el tiempo y `&sessions=6` cambia el número de sesiones simuladas.
 - O actívalo desde la interfaz, con **Ver demostración** (cuando la oficina está vacía) o **Configuración › Modo
   demostración**, que pone agentes ficticios junto a los reales. Con `npm run demo` (o `HABBLAUD_DEMO=1` en el
@@ -746,7 +746,7 @@ Todo funciona sin configurar nada. Si necesitas ajustar algo, usa variables de e
 
 | Variable | Por defecto | Para qué |
 | --- | --- | --- |
-| `HABBLAUD_PORT` | `4747` | Puerto HTTP (en Docker, el puerto publicado en el host). |
+| `HABBLAUD_PORT` | `5757` | Puerto HTTP (en Docker, el puerto publicado en el host). |
 | `HABBLAUD_HOST` | `127.0.0.1` | Interfaz del servidor en modo Node. Fuera de `127.0.0.1`/`localhost`, la terminal (y responder y enviar mensajes desde la oficina) queda desactivada. |
 | `HABBLAUD_BIND` | `127.0.0.1` | Solo Docker (en el `.env`): dónde se publica el puerto. `0.0.0.0` abre la red local (y desactiva la terminal y lo que actúa sobre las sesiones). |
 | `HABBLAUD_CLAUDE_DIRS` | detección automática | Carpetas de las cuentas, separadas por comas (p. ej., `/caminho/conta1,/caminho/conta2`). |
@@ -1007,13 +1007,13 @@ los pasa al contenedor.
   (Habblaud caído, error, tiempo agotado), sale sin decidir: vale la terminal. El comando completo o el diff solo salen
   del servidor hacia quien abrió la página desde la propia computadora. "Permitir siempre" solo aplica una regla que el
   propio Claude Code sugirió para esa solicitud. Atención: cualquier programa o persona que pueda abrir
-  `http://localhost:4747` en esta máquina también puede responder; en computadoras compartidas con otros usuarios, no
+  `http://localhost:5757` en esta máquina también puede responder; en computadoras compartidas con otros usuarios, no
   instales el hook (`npm run mod:install -- --sem-permissoes`).
   Excepción: el [celular con inicio de sesión](#celular-con-inicio-de-sesión-y-https-aprobar-solicitudes) también responde (es lo predeterminado) y ve el mismo comando o diff.
 - **Enviar mensajes, solo local, y con una advertencia:** el mensaje entra en la sesión como si lo hubieras escrito
   tú, así que vale lo que el agente puede hacer con una solicitud tuya. Sigue el mismo bloqueo (bind local, `Host`
   local, JSON y origen local, así que un sitio abierto en el navegador no puede enviarlo), pero **cualquier programa de
-  esta máquina** que hable con `http://localhost:4747`, incluido un agente que ejecute un comando, puede dejarle un
+  esta máquina** que hable con `http://localhost:5757`, incluido un agente que ejecute un comando, puede dejarle un
   mensaje a otra sesión que tenga el plugin. Si eso no te sirve (computadora compartida, agentes ejecutándose sin
   supervisión), no instales el plugin (`npm run mod:install -- --sem-mensagens`) o desactívalo con
   `HABBLAUD_MENSAGENS=0`. El texto de los mensajes no se guarda: desaparece del servidor en cuanto se entrega.
@@ -1023,7 +1023,7 @@ los pasa al contenedor.
   de sesiones abiertas en otras terminales. Sigue el mismo bloqueo que la terminal (bind local, `Host` local, nada de
   proxies ni túneles) y cada solicitud tiene que venir de la propia computadora, con origen local (un sitio abierto en
   el navegador no puede enviarla). Aun así, **cualquier programa de esta máquina** que hable con
-  `http://localhost:4747`, incluido un agente que ejecute un comando, obtiene ese poder. Antes de terminar un proceso
+  `http://localhost:5757`, incluido un agente que ejecute un comando, obtiene ese poder. Antes de terminar un proceso
   externo, Habblaud comprueba en el registro de sesiones y en el sistema que ese PID sigue siendo ese Claude Code
   (mismo inicio y ejecutable). En computadoras compartidas o con agentes ejecutándose sin supervisión, déjala
   desactivada.
@@ -1062,8 +1062,8 @@ los pasa al contenedor.
 
 | Comando | Qué hace |
 | --- | --- |
-| `npm run dev` | Servidor + Vite en http://localhost:4747, con recarga automática. |
-| `npm run dev:client` | Solo Vite, en http://localhost:5173 (ábrelo con `?mock=1`; `/api` se redirige al puerto 4747). |
+| `npm run dev` | Servidor + Vite en http://localhost:5757, con recarga automática. |
+| `npm run dev:client` | Solo Vite, en http://localhost:5173 (ábrelo con `?mock=1`; `/api` se redirige al puerto 5757). |
 | `npm run demo` | `npm run dev` con el modo demostración activado. |
 | `npm run build` / `npm start` | Compila y ejecuta la versión de producción. |
 | `npm test` | Pruebas (Vitest). |
@@ -1079,7 +1079,7 @@ Para tomar capturas de pantalla sin abrir tu navegador, `scripts/shot.mjs` usa u
 (Playwright). La primera vez, descarga el navegador (una sola vez): `npx playwright-core install chromium-headless-shell`.
 
 ```bash
-node scripts/shot.mjs 'http://localhost:4747/?mock=1&speed=3' /tmp/habblaud.png --size 1400x900 --wait 4000
+node scripts/shot.mjs 'http://localhost:5757/?mock=1&speed=3' /tmp/habblaud.png --size 1400x900 --wait 4000
 ```
 
 En la consola del navegador, `habblaud.world.debug` tiene herramientas para probar escenas (p. ej.,
@@ -1116,7 +1116,7 @@ Durante el trabajo, anota los cambios en "Não lançado" (la sección de lo que 
 <summary><b>La oficina está vacía</b></summary>
 
 Solo aparecen las sesiones **abiertas** de Claude Code. Comprueba si hay alguna en ejecución y si la cuenta se detectó
-en `http://localhost:4747/api/health`. Si las carpetas de las cuentas están en otro lugar, usa
+en `http://localhost:5757/api/health`. Si las carpetas de las cuentas están en otro lugar, usa
 `HABBLAUD_CLAUDE_DIRS=/caminho/conta1,/caminho/conta2`.
 
 </details>
@@ -1143,7 +1143,7 @@ con `claude --safe-mode`.
 </details>
 
 <details>
-<summary><b>"El puerto 4747 ya está en uso"</b></summary>
+<summary><b>"El puerto 5757 ya está en uso"</b></summary>
 
 Ya hay otro Habblaud (Node o Docker) en ejecución. Detenlo (`npm run docker:down`, o Ctrl+C en la terminal de
 `npm start`) o usa otro puerto: `HABBLAUD_PORT=4848 npm run docker:up` (Docker) o `HABBLAUD_PORT=4848 npm start`
@@ -1156,7 +1156,7 @@ Ya hay otro Habblaud (Node o Docker) en ejecución. Detenlo (`npm run docker:dow
 
 Comprueba que creaste el `.env` con `HABBLAUD_BIND=0.0.0.0` y que recreaste el contenedor
 (`npm run docker:up -- --no-build`), que el celular está en la misma red Wi-Fi y que el firewall de la computadora
-permite conexiones en el puerto 4747. Por IP funciona directamente; para abrirlo por un nombre (p. ej.,
+permite conexiones en el puerto 5757. Por IP funciona directamente; para abrirlo por un nombre (p. ej.,
 `meu-mac.local`), agrega `HABBLAUD_ALLOWED_HOSTS=meu-mac.local` (en Docker, en el mismo `.env`).
 
 </details>
@@ -1166,7 +1166,7 @@ permite conexiones en el puerto 4747. Por IP funciona directamente; para abrirlo
 
 La terminal solo existe con Habblaud accesible únicamente desde la propia computadora. Comprueba que el `.env` no
 tenga `HABBLAUD_BIND=0.0.0.0` (o, en modo Node, que no usaste `HABBLAUD_HOST=0.0.0.0`) ni `HABBLAUD_TERMINAL=0`, y
-ábrelo por `http://localhost:4747` (por la IP de la red o por un nombre de `HABBLAUD_ALLOWED_HOSTS` se rechaza). En
+ábrelo por `http://localhost:5757` (por la IP de la red o por un nombre de `HABBLAUD_ALLOWED_HOSTS` se rechaza). En
 Docker, un contenedor creado antes de esta función tiene que recrearse: `npm run docker:up`. El log de inicio
 (`npm run docker:logs`) dice si la terminal está activada y, si no lo está, por qué.
 

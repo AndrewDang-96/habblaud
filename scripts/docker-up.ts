@@ -71,7 +71,7 @@ const CODEX_CONTAINER_ROOT = '/codex';
  * auth.json, config.toml, shell_snapshots/, history.jsonl, logs e os SQLite ficam no host.
  */
 export const CODEX_MOUNTED_SUBDIRS = ['sessions', 'archived_sessions', 'thread-writer-locks'] as const;
-const DEFAULT_PORT = 4747;
+const DEFAULT_PORT = 5757;
 const HEALTH_TIMEOUT_MS = 120_000;
 /** Imagem e volume de dados como o Compose os nomeia (`name: habblaud` no docker-compose.yml). */
 const IMAGE = 'habblaud:local';
@@ -781,7 +781,7 @@ function prepareRemoteTls(): string | undefined {
  * Portas do acesso pelo celular, só com ele configurado (HABBLAUD_REMOTE_USER no .env): a remota (HABBLAUD_REMOTE_PORT,
  * padrão 4748) e, se houver, HABBLAUD_REMOTE_HTTP_PORT (o setup grava 80 quando a remota é a 443), que cai na mesma
  * porta do container e responde HTTP com 308 para https:// — quem digita só "meuclaude.local" cai no HTTPS. Sem o
- * setup, nada é publicado além da 4747.
+ * setup, nada é publicado além da 5757.
  */
 export function remotePortsFrom(env: string): string[] {
   if (!readEnvValue(env, 'HABBLAUD_REMOTE_USER')) return [];

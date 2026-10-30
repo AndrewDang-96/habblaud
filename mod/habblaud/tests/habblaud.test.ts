@@ -248,7 +248,7 @@ describe('/habblaud', () => {
   test('Habblaud de antes do mod (404 "rota desconhecida"): pede para atualizar', async ($, on) => {
     world(on, { env: { HOME: '/home/fulano' }, answer: () => ({ status: 404, text: '{"error":"rota desconhecida"}' }) })
     const out = await $.command.run(RUN)
-    expect(out.text).toMatch(/^O Habblaud em http:\/\/localhost:4747 está numa versão sem a rota do mod/)
+    expect(out.text).toMatch(/^O Habblaud em http:\/\/localhost:5757 está numa versão sem a rota do mod/)
   })
 })
 

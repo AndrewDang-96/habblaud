@@ -404,37 +404,37 @@ describe('GET /api/mod/summary (mod do Claude Code)', () => {
 });
 
 describe('guarda de Host/Origin', () => {
-  const allowed = parseAllowedHosts(' Meu-Mac.local:4747 , habblaud.lan ');
+  const allowed = parseAllowedHosts(' Meu-Mac.local:5757 , habblaud.lan ');
 
   it('hostnameOf e HABBLAUD_ALLOWED_HOSTS', () => {
     expect([...allowed]).toEqual(['meu-mac.local', 'habblaud.lan']);
-    expect(hostnameOf('LocalHost:4747')).toBe('localhost');
-    expect(hostnameOf('[::1]:4747')).toBe('::1');
+    expect(hostnameOf('LocalHost:5757')).toBe('localhost');
+    expect(hostnameOf('[::1]:5757')).toBe('::1');
     expect(hostnameOf('a b')).toBeUndefined();
     expect(hostnameOf('[::1]lixo')).toBeUndefined();
   });
 
   it('Host: IPs, localhost e liberados sim; domínios de fora não', () => {
     expect(hostAllowed(undefined, allowed)).toBe(true);
-    for (const h of ['localhost:4747', 'app.localhost', '127.0.0.1:4747', '[::1]:1', '10.0.0.5:4747', 'meu-mac.local:4747']) expect(hostAllowed(h, allowed)).toBe(true);
-    for (const h of ['attacker.example:4747', 'localhost.attacker.example', '127.0.0.1.nip.io', '', 'x y']) expect(hostAllowed(h, allowed)).toBe(false);
+    for (const h of ['localhost:5757', 'app.localhost', '127.0.0.1:5757', '[::1]:1', '10.0.0.5:5757', 'meu-mac.local:5757']) expect(hostAllowed(h, allowed)).toBe(true);
+    for (const h of ['attacker.example:5757', 'localhost.attacker.example', '127.0.0.1.nip.io', '', 'x y']) expect(hostAllowed(h, allowed)).toBe(false);
   });
 
   it('isLoopbackHost: só localhost, *.localhost, 127.x e ::1 (terminal)', () => {
-    for (const h of ['localhost:4747', 'LOCALHOST', 'app.localhost:1', '127.0.0.1:4747', '127.8.9.10', '[::1]:4747']) expect(isLoopbackHost(h)).toBe(true);
-    for (const h of [undefined, '', '10.0.0.5:4747', '192.168.0.10', '0.0.0.0:4747', 'habblaud.lan', 'meu-mac.local:4747', '[::]:4747', 'localhost.attacker.example', '127.0.0.1.nip.io', 'x y']) {
+    for (const h of ['localhost:5757', 'LOCALHOST', 'app.localhost:1', '127.0.0.1:5757', '127.8.9.10', '[::1]:5757']) expect(isLoopbackHost(h)).toBe(true);
+    for (const h of [undefined, '', '10.0.0.5:5757', '192.168.0.10', '0.0.0.0:5757', 'habblaud.lan', 'meu-mac.local:5757', '[::]:5757', 'localhost.attacker.example', '127.0.0.1.nip.io', 'x y']) {
       expect(isLoopbackHost(h)).toBe(false);
     }
   });
 
   it('Origin: ausente, mesma origem ou local', () => {
-    expect(originAllowed(undefined, 'localhost:4747', allowed)).toBe(true);
-    expect(originAllowed('http://localhost:4747', 'localhost:4747', allowed)).toBe(true);
-    expect(originAllowed('http://localhost:5173', '127.0.0.1:4747', allowed)).toBe(true); // Vite dev com proxy
-    expect(originAllowed('http://192.168.0.10:4747', '192.168.0.10:4747', allowed)).toBe(true);
-    expect(originAllowed('http://attacker.example', 'localhost:4747', allowed)).toBe(false);
-    expect(originAllowed('http://1.2.3.4', 'localhost:4747', allowed)).toBe(false);
-    expect(originAllowed('null', 'localhost:4747', allowed)).toBe(false);
-    expect(originAllowed('file://', 'localhost:4747', allowed)).toBe(false);
+    expect(originAllowed(undefined, 'localhost:5757', allowed)).toBe(true);
+    expect(originAllowed('http://localhost:5757', 'localhost:5757', allowed)).toBe(true);
+    expect(originAllowed('http://localhost:5173', '127.0.0.1:5757', allowed)).toBe(true); // Vite dev com proxy
+    expect(originAllowed('http://192.168.0.10:5757', '192.168.0.10:5757', allowed)).toBe(true);
+    expect(originAllowed('http://attacker.example', 'localhost:5757', allowed)).toBe(false);
+    expect(originAllowed('http://1.2.3.4', 'localhost:5757', allowed)).toBe(false);
+    expect(originAllowed('null', 'localhost:5757', allowed)).toBe(false);
+    expect(originAllowed('file://', 'localhost:5757', allowed)).toBe(false);
   });
 });

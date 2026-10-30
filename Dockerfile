@@ -30,7 +30,7 @@ FROM node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b533
 # HABBLAUD_USAGE_DIR: onde o docker-up monta (somente leitura) o uso capturado pelo tap de statusline.
 ENV NODE_ENV=production \
     HABBLAUD_HOST=0.0.0.0 \
-    HABBLAUD_PORT=4747 \
+    HABBLAUD_PORT=5757 \
     HABBLAUD_IN_DOCKER=1 \
     HABBLAUD_DATA_DIR=/data \
     HABBLAUD_USAGE_DIR=/usage
@@ -47,10 +47,10 @@ RUN mkdir -p /data && chown node:node /data
 # então o processo não consegue alterá-lo; só /data é gravável.
 USER node
 
-EXPOSE 4747
+EXPOSE 5757
 VOLUME ["/data"]
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD ["node", "-e", "fetch('http://127.0.0.1:4747/api/health',{signal:AbortSignal.timeout(4000)}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"]
+  CMD ["node", "-e", "fetch('http://127.0.0.1:5757/api/health',{signal:AbortSignal.timeout(4000)}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"]
 
 CMD ["node", "dist/server/index.js"]

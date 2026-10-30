@@ -9,7 +9,7 @@
 //   `node:*` aqui;
 // - `npm run hooks:install` (versões anteriores), que grava em cada <conta>/settings.json:
 //
-//   node /caminho/do/habblaud/mod/habblaud-permissoes/hooks/permission-hook.mjs [--port 4747] [--timeout 300]
+//   node /caminho/do/habblaud/mod/habblaud-permissoes/hooks/permission-hook.mjs [--port 5757] [--timeout 300]
 //
 // O Claude Code mostra o diálogo no terminal e roda este hook AO MESMO TEMPO (vale o que responder
 // primeiro); em subagentes em segundo plano o diálogo só aparece depois que o hook termina. O hook:
@@ -30,7 +30,7 @@
 import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-export const DEFAULT_PORT = 4747;
+export const DEFAULT_PORT = 5757;
 export const DEFAULT_TIMEOUT_S = 300;
 const MIN_TIMEOUT_S = 5;
 const MAX_TIMEOUT_S = 86_400;

@@ -224,16 +224,16 @@ describe('hook.mjs do Codex (processo)', () => {
 
 describe('hook.mjs do Codex (funções)', () => {
   it('readConfig: arquivo, reserva HABBLAUD_PORT, padrões e limites da espera', () => {
-    expect(hook.readConfig({ HOME: home })).toEqual({ port: 4747, waitMs: 25_000 });
+    expect(hook.readConfig({ HOME: home })).toEqual({ port: 5757, waitMs: 25_000 });
     expect(hook.readConfig({ HOME: home, HABBLAUD_PORT: '4851' })).toEqual({ port: 4851, waitMs: 25_000 });
     writeConfig({ port: 4900, permissionTimeoutS: 60 });
     expect(hook.readConfig({ HOME: home, HABBLAUD_PORT: '4851' })).toEqual({ port: 4900, waitMs: 60_000 });
     writeConfig({ port: 'x', permissionTimeoutS: 1 });
-    expect(hook.readConfig({ HOME: home })).toEqual({ port: 4747, waitMs: 5_000 });
+    expect(hook.readConfig({ HOME: home })).toEqual({ port: 5757, waitMs: 5_000 });
     writeConfig({ permissionTimeoutS: 999 });
-    expect(hook.readConfig({ HOME: home })).toEqual({ port: 4747, waitMs: 120_000 });
+    expect(hook.readConfig({ HOME: home })).toEqual({ port: 5757, waitMs: 120_000 });
     writeFileSync(join(home, '.habblaud', 'codex-hook.json'), '{ quebrado');
-    expect(hook.readConfig({ HOME: home })).toEqual({ port: 4747, waitMs: 25_000 });
+    expect(hook.readConfig({ HOME: home })).toEqual({ port: 5757, waitMs: 25_000 });
   });
 
   it('codexHomeOf/accountOf: CODEX_HOME (com ~), transcript_path (sessions/ ou archived_sessions/) e ~/.codex', () => {

@@ -286,7 +286,7 @@ describe('mod-install.ts (funções puras)', () => {
 
     it('migração do jeito antigo: hook e tap de uma pasta com o nome antigo também são reconhecidos', () => {
       const tap = wrapCommand('node', '/x/codetown/scripts/statusline-tap.mjs', 'ccstatusline');
-      const hook = hookEntry(hookCommand('node', '/x/codetown/mod/codetown-permissoes/hooks/permission-hook.mjs', { port: 4747, timeoutS: 300 }), { port: 4747, timeoutS: 300 });
+      const hook = hookEntry(hookCommand('node', '/x/codetown/mod/codetown-permissoes/hooks/permission-hook.mjs', { port: 5757, timeoutS: 300 }), { port: 5757, timeoutS: 300 });
       const m = planMigration({ statusLine: { type: 'command', command: tap }, hooks: { PermissionRequest: [{ matcher: '*', hooks: [hook] }] } }, { modInstalled: true, permissionsInstalled: true, permissions: true });
       expect(m.settings).toEqual({ statusLine: { type: 'command', command: 'ccstatusline' } });
       expect(m.done).toHaveLength(2);
@@ -295,7 +295,7 @@ describe('mod-install.ts (funções puras)', () => {
 
   describe('migração do jeito antigo', () => {
     const tap = wrapCommand('node', '/repo/habblaud/scripts/statusline-tap.mjs', 'npx -y ccstatusline');
-    const hook = hookEntry(hookCommand('node', '/repo/habblaud/scripts/permission-hook.mjs', { port: 4747, timeoutS: 300 }), { port: 4747, timeoutS: 300 });
+    const hook = hookEntry(hookCommand('node', '/repo/habblaud/scripts/permission-hook.mjs', { port: 5757, timeoutS: 300 }), { port: 5757, timeoutS: 300 });
     const mine = { type: 'command', command: 'meu-hook' };
     const settings = {
       model: 'opus',
@@ -496,7 +496,7 @@ describe('mod-install.ts (CLI falso, HOME falso)', () => {
   let out: string[];
   let fake: FakeClaude;
   const tap = wrapCommand('node', '/x/habblaud/scripts/statusline-tap.mjs', 'npx -y ccstatusline');
-  const hook = hookEntry(hookCommand('node', '/x/habblaud/scripts/permission-hook.mjs', { port: 4747, timeoutS: 300 }), { port: 4747, timeoutS: 300 });
+  const hook = hookEntry(hookCommand('node', '/x/habblaud/scripts/permission-hook.mjs', { port: 5757, timeoutS: 300 }), { port: 5757, timeoutS: 300 });
   const original = {
     model: 'opus',
     statusLine: { type: 'command', command: tap },
@@ -641,11 +641,11 @@ describe('mod-install.ts (CLI falso, HOME falso)', () => {
     expect(text).toContain('! tap de statusline antigo ainda instalado junto com o mod');
     expect(text).toContain('hook de permissão antigo instalado (jeito antigo');
     expect(text).toContain('último uso capturado há 5 min (pelo mod)');
-    expect(text).toContain('Habblaud em http://127.0.0.1:4747: fora do ar');
+    expect(text).toContain('Habblaud em http://127.0.0.1:5757: fora do ar');
     expect(text).not.toContain('Mensagens pelo escritório');
     out = [];
     await exec('status', {}, { permissions: true, messages: true });
-    expect(out.join('\n')).toContain('Habblaud em http://127.0.0.1:4747: no ar e respondendo pedidos de permissão');
+    expect(out.join('\n')).toContain('Habblaud em http://127.0.0.1:5757: no ar e respondendo pedidos de permissão');
     expect(out.join('\n')).toContain('Mensagens pelo escritório: ligadas (chegam às sessões abertas com o plugin habblaud-mensagens).');
     out = [];
     await exec('status', {}, { permissions: true, messages: false });
@@ -673,7 +673,7 @@ describe('mod-install.ts (CLI falso, HOME falso)', () => {
   });
 
   describe('nome antigo (codetown): o que o mod:install da 0.3 deixou', () => {
-    const oldHook = hookEntry(hookCommand('node', '/x/codetown/mod/codetown-permissoes/hooks/permission-hook.mjs', { port: 4747, timeoutS: 300 }), { port: 4747, timeoutS: 300 });
+    const oldHook = hookEntry(hookCommand('node', '/x/codetown/mod/codetown-permissoes/hooks/permission-hook.mjs', { port: 5757, timeoutS: 300 }), { port: 5757, timeoutS: 300 });
     const oldSettings = { model: 'opus', hooks: { PermissionRequest: [{ matcher: '*', hooks: [oldHook] }] } };
     const OLD = ['plugin uninstall codetown@codetown --scope user', 'plugin uninstall codetown-permissoes@codetown --scope user', 'plugin marketplace remove codetown'];
 

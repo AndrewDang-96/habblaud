@@ -4,7 +4,7 @@ Node puro (sem dependências de runtime). Observa as sessões **abertas** do Cla
 contas da máquina, mantém o modelo do escritório e transmite tudo via SSE.
 
 ```
-npm run dev      # servidor + Vite (middleware, HMR) em http://127.0.0.1:4747
+npm run dev      # servidor + Vite (middleware, HMR) em http://127.0.0.1:5757
 npm run build && npm start   # produção: serve dist/client
 ```
 
@@ -477,7 +477,7 @@ em `shared/world/city.ts` (fonte da verdade; o servidor do mundo guarda a cópia
 
 | Variável | Padrão | Uso |
 | --- | --- | --- |
-| `HABBLAUD_PORT` | `4747` | porta HTTP |
+| `HABBLAUD_PORT` | `5757` | porta HTTP |
 | `HABBLAUD_HOST` | `127.0.0.1` | interface (o Docker usa `0.0.0.0`); fora do loopback, o terminal (e as permissões e mensagens) fica desligado |
 | `HABBLAUD_BIND` | — (Compose: `127.0.0.1`) | só Docker: interface do host onde a porta é publicada, repassada ao container; só loopback liga o terminal |
 | `HABBLAUD_TERMINAL` | — | `0` desliga o terminal, as permissões e as mensagens pelo escritório (não liga com a porta exposta) |
@@ -500,7 +500,7 @@ em `shared/world/city.ts` (fonte da verdade; o servidor do mundo guarda a cópia
 | `HABBLAUD_WORLD_DEV` | desligado (`--dev` liga) | `1` aceita o servidor do mundo em `http://127.0.0.1` ou `ws://127.0.0.1` |
 
 No hook de permissão (ambiente do Claude Code; os argumentos `--port`/`--timeout` gravados pelo instalador têm
-preferência): `HABBLAUD_PORT` (porta do Habblaud, padrão `4747`), `HABBLAUD_PERMISSION_TIMEOUT` (segundos de espera
+preferência): `HABBLAUD_PORT` (porta do Habblaud, padrão `5757`), `HABBLAUD_PERMISSION_TIMEOUT` (segundos de espera
 pela resposta no Habblaud, padrão `300`, entre 5 e 1800) e `HABBLAUD_HOOK_DEBUG=1` (conta no stderr o que fez).
 
 ## Uso do plano (5h e semanal)

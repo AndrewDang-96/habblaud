@@ -60,7 +60,7 @@ describe('describeCommand em português (casos reais que caíam no inglês)', ()
     expect(t('ps aux | grep vite')).toBe('Conferindo processos');
     expect(t('lsof -i :4771')).toBe('Conferindo quem usa a porta 4771');
     expect(t('curl -s localhost:4763/api/snapshot | jq .rev')).toBe('Testando a API local (:4763/api/snapshot)');
-    expect(t('curl http://127.0.0.1:4747/api/health')).toBe('Testando a API local (:4747/api/health)');
+    expect(t('curl http://127.0.0.1:5757/api/health')).toBe('Testando a API local (:5757/api/health)');
     expect(t('curl -o out.png -sS https://www.example.com/x.png')).toBe('Chamando example.com');
     expect(t('grep "a\\|b" file.ts')).toBe('Buscando “a | b”');
     expect(t('sed -i "" "s/a/b/" src/x.ts')).toBe('Editando x.ts');

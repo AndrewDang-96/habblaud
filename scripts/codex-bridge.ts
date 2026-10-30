@@ -31,7 +31,7 @@ import { discoverClaudeDirs } from '../server/accounts/detect';
 import { HOST_WAIT_MS } from '../server/host-wait';
 import { readFileSync } from 'node:fs';
 
-export const DEFAULT_PORT = 4747;
+export const DEFAULT_PORT = 5757;
 /** Intervalo entre as rodadas. */
 export const POLL_MS = 2_000;
 /** Pausa mínima entre rodadas com espera (Habblaud antigo, que responde na hora) e depois de uma recusa. */

@@ -380,7 +380,7 @@ describe('porta remota', () => {
     expect(JSON.parse((await request(s.remoteBase, '/api/access', { headers })).body).world).toBe(false);
     // Na porta local, com Host local, as rotas chegam ao Habblaud World.
     expect((await request(s.localBase, '/api/world/status')).status).toBe(200);
-    expect((await request(s.localBase, '/api/world/status', { headers: { Host: '192.168.0.10:4747' } })).status).toBe(403);
+    expect((await request(s.localBase, '/api/world/status', { headers: { Host: '192.168.0.10:5757' } })).status).toBe(403);
     expect(s.worldCalls).toEqual(['GET /api/world/status']);
     expect(JSON.parse((await request(s.localBase, '/api/access')).body).world).toBe(true);
   });
@@ -529,7 +529,7 @@ describe('porta local (inalterada)', () => {
     expect(ok.status).toBe(200);
     const lanHost = await request(h.localBase, '/api/permissions/p1/decision', {
       method: 'POST',
-      headers: { Host: '192.168.1.5:4747' },
+      headers: { Host: '192.168.1.5:5757' },
       body: { behavior: 'allow' },
     });
     expect(lanHost.status).toBe(403);
@@ -587,7 +587,7 @@ describe('GET /api/access (o que a página pode fazer)', () => {
       world: false,
     });
     expect(JSON.parse((await request(h.localBase, '/api/access')).body)).toEqual({ remote: false, local: true, permissions: true, messages: true, terminal: false, spawn: true, world: true });
-    expect(JSON.parse((await request(h.localBase, '/api/access', { headers: { Host: '192.168.1.5:4747' } })).body)).toMatchObject({
+    expect(JSON.parse((await request(h.localBase, '/api/access', { headers: { Host: '192.168.1.5:5757' } })).body)).toMatchObject({
       local: false,
       permissions: false,
       messages: false,

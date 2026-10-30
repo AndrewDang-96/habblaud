@@ -267,13 +267,13 @@ describe('docker-compose.yml', () => {
 describe('travas', () => {
   it('Host que não é local: 403 local_only (IP da rede ou nome de HABBLAUD_ALLOWED_HOSTS)', async () => {
     const s = await start();
-    for (const host of ['192.168.0.10:4747', 'meu-mac.local:4747']) {
+    for (const host of ['192.168.0.10:5757', 'meu-mac.local:5757']) {
       const r = await call(s.base, 'GET', '/api/world/status', undefined, { Host: host });
       expect(r.status, host).toBe(403);
       expect(r.body.error.code).toBe('local_only');
     }
-    expect((await call(s.base, 'GET', '/api/world/status', undefined, { Host: 'localhost:4747' })).status).toBe(200);
-    expect((await call(s.base, 'GET', '/api/access', undefined, { Host: '192.168.0.10:4747' })).body.world).toBe(false);
+    expect((await call(s.base, 'GET', '/api/world/status', undefined, { Host: 'localhost:5757' })).status).toBe(200);
+    expect((await call(s.base, 'GET', '/api/access', undefined, { Host: '192.168.0.10:5757' })).body.world).toBe(false);
     expect((await call(s.base, 'GET', '/api/access')).body.world).toBe(true);
   });
 

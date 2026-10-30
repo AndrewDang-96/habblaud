@@ -101,7 +101,7 @@ describe('plugin habblaud-permissoes', () => {
   // No plugin a espera vem do ambiente (HABBLAUD_PERMISSION_TIMEOUT), não do comando: o tempo limite do Claude Code
   // precisa caber a maior espera que o hook aceita, senão ele mata o hook antes (era 330 s e cortava em 5 min; a espera vai até 24 h).
   it('o mesmo hook do instalador: PermissionRequest, matcher "*", mensagem igual e tempo limite que cabe a espera máxima', () => {
-    const installed = hookEntry(hookCommand('node', '/x/permission-hook.mjs', { port: 4747, timeoutS: MAX_TIMEOUT_MS / 1000 }), { port: 4747, timeoutS: MAX_TIMEOUT_MS / 1000 });
+    const installed = hookEntry(hookCommand('node', '/x/permission-hook.mjs', { port: 5757, timeoutS: MAX_TIMEOUT_MS / 1000 }), { port: 5757, timeoutS: MAX_TIMEOUT_MS / 1000 });
     expect(hooks).toHaveLength(1);
     expect(hooks[0]).toEqual({
       event: 'PermissionRequest',
